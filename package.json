@@ -1,5 +1,5 @@
 {
-  "name": "csv-parser",
+  "name": "csv-parser-trackable",
   "version": "2.3.3",
   "description": "Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum test suite",
   "license": "MIT",
