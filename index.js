@@ -163,7 +163,7 @@ class CsvParser extends Transform {
       const e = new RangeError('Row length does not match headers')
       this.emit('error', e)
     } else {
-      if (!skip) this.writeRow(cells)
+      if (!skip) this.writeRow({cells, bufferLength: end - start})
     }
   }
 
@@ -175,7 +175,7 @@ class CsvParser extends Transform {
     return buffer.toString('utf-8', start, end)
   }
 
-  writeRow (cells) {
+  writeRow ({cells, bufferLength}) {
     if (this.headers === false || cells.length > this.headers.length) {
       this.headers = cells.map((value, index) => index)
     }
@@ -188,7 +188,7 @@ class CsvParser extends Transform {
       return o
     }, {})
 
-    this.push(row)
+    this.push({row, bufferLength})
   }
 
   _flush (cb) {
